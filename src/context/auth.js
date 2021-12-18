@@ -21,6 +21,9 @@ export function AuthProvider({children}){
     return signInWithEmailAndPassword(auth, email, password)
   }
 
+  const  handleSignOut = () =>{
+    return signOut(auth)
+  }
   useEffect(() =>{
     const unsubcribe =  onAuthStateChanged(auth, (currentUser) =>{
       setData(currentUser)
@@ -30,7 +33,7 @@ export function AuthProvider({children}){
     }
   },[])
   return(
-    <AuthContext.Provider value={{ handleSignIn, handleSignUp, data}}>
+    <AuthContext.Provider value={{ handleSignIn, handleSignUp, data, handleSignOut}}>
         {children}
     </AuthContext.Provider>
   )

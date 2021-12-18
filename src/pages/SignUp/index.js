@@ -1,11 +1,14 @@
 import React, {useState} from "react";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+
 import { Container, Input,Form, Button } from "semantic-ui-react";
 import {useAuth} from '../../context/auth'
 import  GoogleButton from 'react-google-button'
 import './styles.css'
 
 export function SignUp() {
+  const navigate = useNavigate()
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({
@@ -19,6 +22,10 @@ export function SignUp() {
     try{
       e.preventDefault()
       await handleSignUp(email, password)
+      alert('Authenticado com sucesso, você está sendo direcionado para a a tela de login');
+      setEmail('');
+      setPassword('');
+      navigate('/')
     }catch(error){
       setError((prevState) => ({...prevState, hasError: true, message: error.message}))
       alert(error)
@@ -43,7 +50,7 @@ export function SignUp() {
          onChange={(e) => setPassword(e.target.value)}
          
          />
-        <Button content={'Log In'}/>
+        <Button content={'SignUp'}/>
        <div className="google-button">
          <GoogleButton style={ {
            width: '100%'

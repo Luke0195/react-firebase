@@ -3,7 +3,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup
 } from 'firebase/auth'
 import {auth} from '../services/firebase'
 
@@ -24,6 +26,12 @@ export function AuthProvider({children}){
   const  handleSignOut = () =>{
     return signOut(auth)
   }
+
+
+  const googleSignIn = () =>{
+    const googleAuthProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleAuthProvider)
+  }
   useEffect(() =>{
     const unsubcribe =  onAuthStateChanged(auth, (currentUser) =>{
       setData(currentUser)
@@ -33,7 +41,14 @@ export function AuthProvider({children}){
     }
   },[])
   return(
-    <AuthContext.Provider value={{ handleSignIn, handleSignUp, data, handleSignOut}}>
+    <AuthContext.Provider value={
+      {
+         handleSignIn, 
+         handleSignUp, 
+         data, 
+         handleSignOut,
+         googleSignIn
+         }}>
         {children}
     </AuthContext.Provider>
   )

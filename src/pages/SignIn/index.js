@@ -14,7 +14,7 @@ export function SignIn() {
     message: ''
   });
 
-  const {handleSignIn} = useAuth();
+  const {handleSignIn, googleSignIn} = useAuth();
   
   const handleSubmit = async(e) =>{
     try{
@@ -27,6 +27,15 @@ export function SignIn() {
     }catch(error){
       setError((prevState) => ({...prevState, hasError: true, message: error.message}))
       alert(error)
+    }
+  }
+
+  const authenticateWithGoogle = async() =>{
+    try{
+      await googleSignIn()
+      navigate('home')
+    }catch(error){
+      console.log(error.message)
     }
   }
 
@@ -49,7 +58,10 @@ export function SignIn() {
        <div className="google-button">
          <GoogleButton style={ {
            width: '100%'
-          }}/>
+          }}
+          onClick={authenticateWithGoogle}
+          
+          />
        </div>
         </Form>
 

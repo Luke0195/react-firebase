@@ -6,6 +6,8 @@ import './styles.css'
 
 export function Home() {
   const {data:user, handleSignOut} = useAuth();
+
+  console.log(user)
   const handleLogOut = async() =>{
     try{ 
       await handleSignOut();

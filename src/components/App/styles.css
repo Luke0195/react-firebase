@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+*{
+  padding:0;
+  margin:0;
+  outline:0;
+  box-sizing:border-box;
+  font-family: 'Lato';
+}
+
+html, body, #root{
+  height:100%;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-size:28px;
+}
+
+
+body, input, button{
+  font-size:16px;
+}
+a{
+  text-decoration:none;
+}
+
+button{
+  cursor:pointer;
+}
